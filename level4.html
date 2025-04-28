@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستوى الرابع - الاختبارات</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: "Simplified Arabic", sans-serif;
+            background-color: #ffdead; /* لون خلفية أخضر مبهج */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 80vh;
+        }
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+        button {
+            width: 80%;
+            font-size: 40px;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            border: none;
+            background-color: #20b2aa; /* لون برتقالي للأزرار */
+            color: white;
+            height: 3cm;
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            padding: 0 20px;
+        }
+        .navigation-buttons button {
+            font-size: 20px;
+            width: 3cm;
+            height: 2cm;
+            background-color: #007BFF; /* لون أزرق للأزرار */
+            color: white;
+        }
+    </style>
+</head>
+<body class="level4-bg">
+    <div class="container">
+        <img src="sheaar.png" alt="شعار المدرسة" class="logo">
+        <h1>المستوى الرابع</h1>
+        <button onclick="location.href='level4_test1.html'">الاختبار الأول</button>
+        <button onclick="location.href='level4_test2.html'">الاختبار الثاني</button>
+        <button onclick="location.href='level4_test3.html'">الاختبار الثالث</button>
+    </div>
+    <div class="navigation-buttons">
+        <button onclick="location.href='index.html'" class="prev-btn">السابق</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستوى الأول1</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: "Simplified Arabic", sans-serif;
+            font-size: 40px;
+            background-color: #ADD8E6;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+        .score-box, .timer {
+            position: absolute;
+            top: 100px;
+            font-size: 30px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .score-box { left: 50px; color: red; background: rgba(255, 255, 0, 0.6); }
+        .timer { right: 50px; background: rgba(255, 255, 255, 0.6); }
+        .options button, .navigation-buttons button {
+            font-size: 45px;
+            border-radius: 10px;
+            padding: 22px;
+            width: 250px;
+            height: 100px;
+            white-space: nowrap;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+        .listen-btn {
+            background-color: red;
+            color: white;
+            font-size: 36px;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 1cm;
+            cursor: pointer;
+        }
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            bottom: 50px;
+            width: 100%;
+            padding: 0 20px;
+        }
+        .navigation-buttons button {
+            width: 3cm; height: 2cm;
+            background-color: #ADD8E6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .end-message { font-size: 30px; color: red; display: none; }
+        .header img { width: 200px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header"><img src="sheaar.png" alt="شعار المدرسة"></div>
+    <div class="score-box">الدرجة: <span id="score">0</span>/15</div>
+    <div class="timer">⏳ <span id="time-left">15</span></div>
+    <div class="container">
+        <h2 style="font-size: 30px;">المستوى الأول 1</h2>
+        <div class="question-box" id="question-box"></div>
+        <div class="end-message" id="end-message">لقد انتهيت من جميع الأسئلة!</div>
+    </div>
+    <div class="navigation-buttons">
+     <button class="prev-btn" style="font-size: 25px; padding: 15px 30px; background-color: #FF5733; color: white; border-radius: 10px; cursor: pointer; position: fixed; bottom: 50px; left: 50px; width: 150px; height: 80px; text-align: center;" onclick="location.href='level1.html'">السابق</button>
+
+
+       <button class="next-btn" style="font-size: 25px; padding: 15px 30px; background-color: #4CAF50; color: white; border-radius: 10px; cursor: pointer; position: fixed; bottom: 50px; right: 50px; width: 150px; height: 80px; text-align: center;" onclick="location.href='index.html'">الرئيسية</button>
+
+    </div>
+    <script>
+        const questions = [
+            { verbs: ["جَـمَـعَ", "جَـلـَسَ", "جَـمَـحَ"], correct: 0 },
+            { verbs: ["حَـسَـمَ", "حَـضَـرَ", "حَـكَـمَ"], correct: 1 },
+            { verbs: ["خَـرَجَ", "خَطَـبَ", "خَـلَـقَ"], correct: 2 },
+            { verbs: ["دَخَـلَ", "دَهَـنَ", "دَرَسَ"], correct: 0 },
+            { verbs: ["ذَهَـبَ", "ذَكَـرَ", "ذَبَـحَ"], correct: 1 },
+            { verbs: ["رَسَـمَ", "رَقَـدَ", "رَفَـضَ"], correct: 2 },
+            { verbs: ["زَعَـمَ", "زَحَـفَ", "زَجَـرَ"], correct: 0 },
+            { verbs: ["سَـكَـنَ", "سَـبَـقَ", "سَـجَـدَ"], correct: 1 },
+            { verbs: ["شَـكَـرَ", "شَـرَحَ", "شَـرَ عَ"], correct: 2 },
+            { verbs: ["صَـبَـرَ", "صَـدَقَ", "صَـنَـعَ"], correct: 0 },
+            { verbs: ["ضَـبَـطَ", "ضَرَبَ", "ضَرَعَ"], correct: 1 },
+            { verbs: ["طَـلَـبَ", "طَـرَحَ", "طَـبَـعَ"], correct: 2 },
+            { verbs: ["ظَلَمَ", "ظَهَرَ", "ظَفَـرَ"], correct: 0 },
+            { verbs: ["عَـرَفَ", "عَـرَضَ", "عَـبَـدَ"], correct: 1 },
+            { verbs: ["غَـسَـلَ", "غَـفَـرَ", "غَـرَسَ"], correct: 2 }
+        ];
+        let index = 0, score = 0, timeLeft = 15, timer;
+        const scoreEl = document.getElementById("score"), timerEl = document.getElementById("time-left"), questionBox = document.getElementById("question-box"), endMessage = document.getElementById("end-message");
+        function playAudio() {
+            const audio = new Audio(`sounds/${questions[index].verbs[questions[index].correct]}.mp3`);
+            audio.play();
+            document.querySelectorAll(".options button").forEach(button => {
+                button.style.cursor = "pointer";
+                button.style.opacity = "1";
+                button.disabled = false;
+            });
+        }
+        function checkAnswer(selected) {
+            clearInterval(timer);
+            if (selected === questions[index].correct) {
+                score++;
+                scoreEl.textContent = score;
+            }
+            index++;
+            index < questions.length ? loadQuestion() : (endMessage.style.display = "block", questionBox.innerHTML = "");
+        }
+        function loadQuestion() {
+            timeLeft = 15;
+            timerEl.textContent = timeLeft;
+            clearInterval(timer);
+            timer = setInterval(() => {
+                if (--timeLeft <= 0) {
+                    checkAnswer(null);
+                }
+                timerEl.textContent = timeLeft;
+            }, 1000);
+            const q = questions[index];
+            const bgColor = index % 2 === 0 ? "#FFC107" : "#90EE90";
+            questionBox.innerHTML = `
+                <button class="listen-btn" onclick="playAudio()">🔊 استمع</button>
+                <div class="options">
+                    ${q.verbs.map((verb, i) => `<button onclick="checkAnswer(${i})" style="background-color:${bgColor}" disabled>${verb}</button>`).join('')}
+                </div>`;
+        }
+        loadQuestion();
+    </script>
+</body>
+</html>

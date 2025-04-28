@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستوى الثالث - الاختبار الأول</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: "Simplified Arabic", sans-serif;
+            font-size: 40px;
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            padding: 20px;
+        }
+        .score-box, .timer {
+            position: absolute;
+            top: 100px;
+            font-size: 30px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .score-box { 
+            left: 50px; 
+            color: red; 
+            background: rgba(255, 255, 0, 0.6); 
+        }
+        .timer { 
+            right: 50px; 
+            background: rgba(255, 255, 255, 0.6); 
+        }
+        .options button, .navigation-buttons button {
+            font-size: 45px;
+            border-radius: 10px;
+            padding: 22px;
+            width: 250px;
+            height: 100px;
+            white-space: nowrap;
+            cursor: pointer;
+            opacity: 1;
+            text-align: center;
+            display: inline-block;
+        }
+        .navigation-buttons {
+            display: flex;
+            flex-direction: column; /* عرض الأزرار بشكل عمودي */
+            position: absolute;
+            top: 280px; /* تحديد الموقع أسفل التايمر */
+            left: 15%;
+            transform: translateX(-100%);
+            z-index: 50;
+        }
+        .navigation-buttons button {
+            width: 3cm; 
+            height: 2cm;
+            background-color: #ADD8E6;
+            color: white;
+            display: flex;
+            align-items: left;
+            justify-content: center;
+            text-align: center;
+            font-size: 25px; /* حجم الخط 25px للأزرار "الرئيسية" و "السابق" */
+            margin-bottom: 1cm; /* إضافة المسافة بين الأزرار */
+        }
+        .end-message { 
+            font-size: 30px; 
+            color: red; 
+            display: none; 
+        }
+        .header img { 
+            width: 200px; 
+            margin-bottom: 10px; 
+        }
+        .level-title {
+            font-size: 30px;
+            margin-top: -40px; /* رفع العنوان ليظهر فوق الصورة */
+        }
+        .sub-title {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .question-box img {
+            width: 375px; 
+            height: 250px; 
+            object-fit: contain; 
+            margin-top: -50px; /* خفض الصورة 2 سم */
+            margin-bottom: 10px; /* زيادة المسافة بين الصورة والأزرار */
+        }
+        .options {
+            margin-top: 0.5cm; /* زيادة المسافة بين الأزرار والصورة */
+            margin-bottom: 5px;
+        }
+        .options button {
+            display: inline-block;
+        }
+
+        /* خصائص زر "الرئيسية" */
+        .navigation-buttons .next-btn {
+            position: absolute; /* جعل الزر ثابت في مكانه */
+            top: 100px; /* وضعه أسفل التايمر */
+            left: 50%; /* تمركز الزر في منتصف الصفحة */
+            transform: translateX(-50%); /* تمركز الزر */
+            background-color: #4CAF50; /* لون الخلفية (اخضر) */
+            color: white; /* لون النص */
+            font-size: 25px; /* حجم الخط */
+            width: 3cm; /* عرض الزر */
+            height: 2cm; /* ارتفاع الزر */
+            border-radius: 10px; /* تدوير الزوايا */
+            text-align: center; /* محاذاة النص داخل الزر */
+            cursor: pointer; /* تغيير المؤشر إلى يد عند التمرير على الزر */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="sheaar.png" alt="شعار المدرسة">
+    </div>
+    <div class="level-title">المستوى الثالث - الاختبار الأول</div>
+    <div class="sub-title">: اختر اسم الصورة الصحيح من أسفل الصورة </div>
+    <div class="score-box">الدرجة: <span id="score">0</span>/15</div>
+    <div class="timer">⏳ <span id="time-left">15</span></div>
+    <div class="container">
+        <div class="question-box" id="question-box"></div>
+        <div class="end-message" id="end-message">لقد انتهيت من جميع الأسئلة!</div>
+    </div>
+    <div class="navigation-buttons">
+        <button class="prev-btn" style="background-color: #FF5733;" onclick="location.href='level3.html'">السابق</button>
+        <!-- إعادة إنشاء زر الرئيسية -->
+        <button class="next-btn" onclick="location.href='index.html'">الرئيسية</button>
+    </div>
+
+    <script>
+        const questions = [
+            { image: "q1.jpg", choices: ["بَدَأَ", "بَابٌ", "بَحَثَ"], correct: 1 },
+            { image: "q2.jpg", choices: ["تُفَاحَةٌ", "تَرَكَ", "تَبِعَ"], correct: 0 },
+            { image: "q3.jpg", choices: ["مَوْزٌ", "مَسَحَ", "مَشَى"], correct: 0 },
+            { image: "q4.jpg", choices: ["طَاوِلَةٌ", "طَرَدَ", "طَارَ"], correct: 0 },
+            { image: "q5.jpg", choices: ["كَسَرَ", "كَتَمَ", "كِتابٌ"], correct: 2 },
+            { image: "q6.jpg", choices: ["قَطَعَ", "قَلَمٌ", "قَلَبَ"], correct: 1 },
+            { image: "q7.jpg", choices: ["سَمَكَةٌ", "سَكَنَ", "سَيَّارَةٌ"], correct: 2 },
+            { image: "q8.jpg", choices: ["طَحَنَ", "طَائِرَةٌ", "طَرَدَ"], correct: 1 },
+            { image: "q9.jpg", choices: ["سَمَكَةٌ", "سَيَّارَةٌ", "سَكَنَ"], correct: 0 },
+            { image: "q10.jpg", choices: ["حَضَرَ", "حُوتٌ", "حَلَفَ"], correct: 1 },
+            { image: "q11.jpg", choices: ["رَسَمَ", "رَجَحَ", "رُمَّانٌ"], correct: 2 },
+            { image: "q12.jpg", choices: ["فَتَحَ", "فَرَاوِلَةٌ", "فَحَصَ"], correct: 1 },
+            { image: "q13.jpg", choices: ["تِينٌ", "تُوتٌ", "تَرَكَ"], correct: 1 },
+            { image: "q14.jpg", choices: ["عَمِلَ", "عِنَبٌ", "عَرَفَ"], correct: 1 },
+            { image: "q15.jpg", choices: ["تِينٌ", "تُوتٌ", "تَرَكَ"], correct: 0 }
+        ];
+        
+        let index = 0, score = 0, timeLeft = 15, timer;
+        const scoreEl = document.getElementById("score"), timerEl = document.getElementById("time-left"), questionBox = document.getElementById("question-box"), endMessage = document.getElementById("end-message");
+
+        function checkAnswer(selected) {
+            clearInterval(timer);
+            if (selected === questions[index].correct) {
+                score++;
+                scoreEl.textContent = score;
+            }
+            index++;
+            index < questions.length ? loadQuestion() : (endMessage.style.display = "block", questionBox.innerHTML = "");
+        }
+
+        function loadQuestion() {
+            timeLeft = 15;
+            timerEl.textContent = timeLeft;
+            clearInterval(timer);
+            timer = setInterval(() => {
+                if (--timeLeft <= 0) {
+                    checkAnswer(null);
+                }
+                timerEl.textContent = timeLeft;
+            }, 1000);
+            
+            const q = questions[index];
+            const bgColor = index % 2 === 0 ? "#FFC107" : "#90EE90";
+            questionBox.innerHTML = `    
+                <img src="images/${q.image}" alt="صورة السؤال">
+                <div class="options">
+                    ${q.choices.map((choice, i) => `<button onclick="checkAnswer(${i})" style="background-color:${bgColor}" >${choice}</button>`).join('')}
+                </div>`; 
+        }
+        
+        loadQuestion();
+    </script>
+</body>
+</html>

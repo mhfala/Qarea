@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية - برنامج أصدقاء اللغة العربية</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            background-color: #FFDDC1; /* لون مبهج للأطفال */
+            font-family: "Arial", sans-serif;
+            direction: rtl; /* تنسيق من اليمين */
+            text-align: right;
+            margin-top: 0; /* إزالة المسافة الفارغة أعلى الصفحة */
+        }
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto;
+            max-width: 300px; /* زيادة حجم الشعار 50% */
+            margin-top: 60px; /* خفض الشعار أسفل شريط المهام */
+        }
+        input {
+            width: 90%;
+            height: 80px;
+            font-size: 40px;
+            text-align: center;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 2px solid #FFA500;
+        }
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70vh;
+            margin-top: -1cm; /* رفع السطرين 2 سم لأعلى */
+        }
+        .level-buttons {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1cm; /* رفع الأزرار أكثر لأعلى */
+        }
+        .level-buttons button {
+            font-size: 30px;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* ألوان الأزرار */
+        .level1-btn {
+            background-color: #FF6F61; /* لون دافئ - زهري مائل للبرتقالي */
+        }
+        .level2-btn {
+            background-color: #6BCB77; /* لون هادي - أخضر */
+        }
+        .level3-btn {
+            background-color: #4F9D9D; /* لون هادي - أزرق مخضر */
+        }
+        .level4-btn {
+            background-color: #FFB84D; /* لون دافئ - برتقالي فاتح */
+        }
+
+        /* تأثيرات على الأزرار */
+        .level-buttons button:hover {
+            transform: scale(1.1); /* تكبير الأزرار عند التمرير */
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* إضافة تأثير الظل */
+        }
+
+        /* شريط المهام */
+        .navbar {
+            background-color: #D3D3D3; /* اللون الرمادي مثل شريط الورد */
+            color: white;
+            padding: 10px 20px;
+            text-align: right; /* جعل النص يبدأ من اليمين */
+            position: fixed;
+            top: 0;
+            right: 0; /* جعل الشريط يبدأ من الجهة اليمنى */
+            width: 100%; /* شريط المهام يأخذ عرض الصفحة */
+            height: 20px; /* تقليل ارتفاع الشريط إلى 50% */
+            display: flex;
+            justify-content: flex-start; /* محاذاة الأيقونات إلى الجهة اليمنى للمشاهد */
+            align-items: center;
+            z-index: 1000;
+        }
+        .navbar .dropdown {
+            display: inline-block;
+            position: relative;
+            margin-left: 20px;
+        }
+        .navbar .dropdown button {
+            background-color: #D3D3D3; /* نفس لون الشريط */
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin: 0;
+        }
+        .navbar .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            z-index: 1;
+        }
+        .navbar .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .navbar .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .navbar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* تنسيق السطرين الجدد */
+        .new-line {
+            font-family: "DecoType Naskh", serif;
+            font-size: 40px; /* حجم الخط الجديد */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body class="home-bg">
+    <!-- شريط المهام العلوي -->
+    <div class="navbar">
+        <div class="dropdown">
+            <button>طريقة الاستخدام</button>
+            <div class="dropdown-content">
+                <a href="#">الدليل</a>
+                <a href="#">التعليمات</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button>حول التطبيق</button>
+            <div class="dropdown-content">
+                <a href="#">معلومات التطبيق</a>
+                <a href="#">فريق التطوير</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <img src="sheaar.png" alt="شعار المدرسة" class="logo">
+    </div>
+    
+    <div class="content-wrapper">
+        <h1>مدرسة الفرقان الابتدائية الخاصة للبنين</h1>
+        <h1>مرحبًا بك في برنامج أصدقاء اللغة العربية</h1>
+        <!-- السطرين الجدد -->
+        <div class="new-line">برنامج ( اقرأ ) التدريب القرائي</div>
+    </div>
+    
+    <div class="level-buttons">
+        <button onclick="location.href='level1.html'" class="level1-btn">المستوى الأول</button>
+        <button onclick="location.href='level2.html'" class="level2-btn">المستوى الثاني</button>
+        <button onclick="location.href='level3.html'" class="level3-btn">المستوى الثالث</button>
+        <button onclick="location.href='level4.html'" class="level4-btn">المستوى الرابع</button>
+    </div>
+</body>
+</html>
